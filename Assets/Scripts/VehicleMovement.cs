@@ -15,7 +15,7 @@ public enum PathTypes
 public class VehicleMovement : MonoBehaviour
 {
     [SerializeField] private List<Path> _movingPaths;
-    [SerializeField] private float _speed = 5;
+    [SerializeField] private float _speed = 4;
 
     [SerializeField] private float _distanceTravelled;
     [SerializeField] private PathCreator _currentWay;
