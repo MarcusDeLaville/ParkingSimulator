@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public enum PathTypes
+public enum Way
 {
     None,
     Correct,
@@ -30,7 +30,7 @@ public class VehicleMovement : MonoBehaviour
         _currentWay.pathUpdated += OnPathChanged;
         _isMoving = true;
 
-        if (_movingPaths[index].PathType != PathTypes.None)
+        if (_movingPaths[index].PathType != Way.None)
         {
             _currentLevel.AnswerConsequences(_movingPaths[index].PathType, _movingPaths[index].ConsequencesWay);
         }
@@ -54,7 +54,7 @@ public class VehicleMovement : MonoBehaviour
     [Serializable]
     public struct Path
     {
-        public PathTypes PathType;
+        public Way PathType;
         public PathCreator PathWay;
         public VehicleMovement ConsequencesWay;
     }

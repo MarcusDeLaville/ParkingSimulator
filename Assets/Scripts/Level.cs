@@ -23,7 +23,7 @@ public class Level : MonoBehaviour
         StartEvent.Invoke();
     }
 
-    public void AnswerConsequences(PathTypes pathTypes, VehicleMovement pathMoving)
+    public void AnswerConsequences(Way pathTypes, VehicleMovement pathMoving)
     {
         _levelSigns.SetActive(false);
         StartCoroutine(Consequences(pathTypes, pathMoving));
@@ -34,11 +34,11 @@ public class Level : MonoBehaviour
         _successIndication = successIndication;
     }
 
-    private IEnumerator Consequences(PathTypes pathTypes, VehicleMovement pathMoving)
+    private IEnumerator Consequences(Way pathTypes, VehicleMovement pathMoving)
     {
-        if (pathTypes == PathTypes.NotCorrect)
+        if (pathTypes == Way.NotCorrect)
         {
-            _successIndication.ShowIndication(IndicationType.Failure);
+            _successIndication.ShowIndication(Indication.Failure);
             yield return new WaitForSeconds(0.5f);
 
             if (pathMoving != null)
@@ -49,15 +49,15 @@ public class Level : MonoBehaviour
             yield return new WaitForSeconds(2f);      
             RestartLevel.Invoke();
         }
-        else if (pathTypes == PathTypes.Correct)
+        else if (pathTypes == Way.Correct)
         {
-            _successIndication.ShowIndication(IndicationType.Success);
+            _successIndication.ShowIndication(Indication.Success);
             yield return new WaitForSeconds(4f);
             CorrectEvent.Invoke();
         }
         else
         {
-            _successIndication.ShowIndication(IndicationType.Failure);
+            _successIndication.ShowIndication(Indication.Failure);
             yield return new WaitForSeconds(1f);
             AlmostCorrectEvent.Invoke();
         }
