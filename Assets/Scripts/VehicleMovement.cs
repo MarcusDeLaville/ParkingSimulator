@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public enum PathTypes
+public enum Way
 {
     None,
     Correct,
@@ -15,11 +15,11 @@ public enum PathTypes
 public class VehicleMovement : MonoBehaviour
 {
     [SerializeField] private List<Path> _movingPaths;
+    [SerializeField] private Level _currentLevel;
     [SerializeField] private float _speed = 4;
 
     [SerializeField] private float _distanceTravelled;
     [SerializeField] private PathCreator _currentWay;
-    [SerializeField] private Level _currentLevel;
 
     private EndOfPathInstruction _endOfPathInstruction = EndOfPathInstruction.Stop;
     private bool _isMoving = false;
@@ -30,7 +30,7 @@ public class VehicleMovement : MonoBehaviour
         _currentWay.pathUpdated += OnPathChanged;
         _isMoving = true;
 
-        if (_movingPaths[index].PathType != PathTypes.None)
+        if (_movingPaths[index].PathType != Way.None)
         {
             _currentLevel.AnswerConsequences(_movingPaths[index].PathType, _movingPaths[index].ConsequencesWay);
         }
@@ -54,7 +54,7 @@ public class VehicleMovement : MonoBehaviour
     [Serializable]
     public struct Path
     {
-        public PathTypes PathType;
+        public Way PathType;
         public PathCreator PathWay;
         public VehicleMovement ConsequencesWay;
     }
